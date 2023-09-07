@@ -1,0 +1,110 @@
+@use '../vars' as *;
+
+#projects-index {
+    border-radius: 10px;
+    border: 3px solid #A5A5A5CC;
+
+    .table-actions{
+        border-bottom: 1px solid $color-primary;
+
+        h1 {
+            font-weight: 600;
+            color: $color-primary;
+            padding: 10px;
+        }
+
+        #add-project-btn {
+            text-align: center;
+            padding: 5px 10px;
+            color: $white;
+            background-color: $color-primary;
+            border: 1px solid $color-primary;
+            border-radius: 7px;
+            transition: color 0.2s ease, background-color 0.2s ease;
+            &:hover {
+                color: $color-primary;
+                background-color: transparent;
+            }
+        }
+    }
+
+
+    #projects-table {
+        border-color: $color-primary;
+
+        th:first-child {
+            width: 5%;
+            background-color: transparent !important;
+        }
+        
+        th:not(:first-child) {
+            width: calc((100% / 8) - 5%);
+            background-color: transparent !important;
+        }
+
+        tbody tr {
+            margin-bottom: 0;
+            background-color: transparent !important;
+        }
+
+        td {
+            background-color: transparent !important;
+            color: $white;
+        }
+    }
+
+    thead th {
+        color: $color-secondary;
+        &:last-child {
+            text-align: center;
+        }
+    }
+
+    tbody tr th:first-child {
+        color: $color-tertiary;
+    }
+
+    .label {
+        padding: 3px 10px;
+        border-radius: 50px;
+    }
+
+    .project-action {
+        text-align: center;
+        padding: 5px 10px;
+        color: $white;
+        border: 1px solid $white;
+        border-radius: 7px;
+    }
+
+    #show-btn {
+        color: $color-tertiary;
+        border: 1px solid $color-tertiary;
+        &:hover {
+            background-color: $color-tertiary;
+            color: $white;
+        }
+    }
+
+    #edit-btn {
+        margin: 0 5px;
+        color: $color-secondary;
+        border: 1px solid $color-secondary;
+        &:hover {
+            background-color: $color-secondary;
+            color: $white;
+        }
+    }
+
+    #destroy-btn {
+        display: inline-block;
+        background-color: transparent;
+        padding: 4px 10px;
+        color: $color-primary;
+        border: 1px solid $color-primary;
+        &:hover {
+            background-color: $color-primary;
+            color: $white;
+        }
+    }
+}

@@ -1,0 +1,15 @@
+// GENERAL PRESET
+@use "vars";
+@use "generics";
+@use "fonts";
+
+// COMPONENTS STYLE
+@use "header";
+@use "admin/_index";
+@use "admin/_show";
+@use "admin/_create";
+@use "admin/_edit";
+@use "admin/_dashboard";
+
+@import '~bootstrap/scss/bootstrap';
+

@@ -1,0 +1,87 @@
+@use '../vars' as *;
+
+#admin-dashboard {
+    
+    .col-4 {
+       .card {
+        height: 300px;
+    } 
+    }
+    
+    .card {
+        color: $white;
+        cursor: pointer;
+    }
+
+    #card-index {
+        border: 2px solid $color-primary;
+        background-color: rgba($color-primary, 0.8);
+        transition: box-shadow 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+        &:hover {
+            background-color: rgba($color-primary, 0.6);
+            box-shadow: 0px 10px 12px rgba($color-primary, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .card-head {
+            border-bottom: 2px solid $color-primary;
+        }
+
+        .card-body {
+            a {
+                text-decoration: none;
+                font-size: 35px;
+                color: $white;
+                padding: 0 100px;
+            }
+        }
+    }
+
+    #card-create {
+        border: 2px solid $color-secondary;
+        background-color: rgba($color-secondary, 0.8);
+        transition: box-shadow 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+        &:hover {
+            background-color: rgba($color-secondary, 0.6);
+            box-shadow: 0px 10px 12px rgba($color-secondary, 0.3);
+            transform: translateY(-10px);
+        }
+    
+        .card-head {
+            border-bottom: 2px solid $color-secondary;
+        }
+    
+        .card-body {
+            a {
+                text-decoration: none;
+                font-size: 35px;
+                color: $white;
+                padding: 0 80px;
+            }
+        }
+    }
+    
+    
+
+    #card-counter {
+        border: 2px solid $color-tertiary;
+        background-color: rgba($color-tertiary, 0.8);
+        transition: box-shadow 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+        &:hover {
+            background-color: rgba($color-tertiary, 0.6);
+            box-shadow: 0px 10px 12px rgba($color-tertiary, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .card-head {
+            border-bottom: 2px solid $color-tertiary;
+        }
+
+        .card-body {
+            p {
+                font-size: 35px;
+                color: $white;
+            }
+        }
+    }
+}

@@ -1,0 +1,51 @@
+@use '../vars' as *;
+
+#project-edit {
+    h2 {
+        color: $color-primary;
+    }
+
+    #edit-image-preview {
+        min-width: 320px;
+        height: 160px;
+        display: block;
+        object-fit: fill;
+    }
+
+    #edit-back-btn {
+        color: $white;
+        padding: 5px 25px;
+        background-color: $color-primary;
+        border: 1px solid $color-primary;
+        transition: color 0.2s ease, background-color 0.2s ease;
+        text-decoration: none;
+        &:hover {
+            background-color: transparent;
+            color: $color-primary;
+        }
+    }
+
+    #edit-reset-btn {
+        color: $white;
+        padding: 5px 25px;
+        background-color: $color-tertiary;
+        border: 1px solid $color-tertiary;
+        transition: color 0.2s ease, background-color 0.2s ease;
+        &:hover {
+            background-color: transparent;
+            color: $color-tertiary;
+        }
+    }
+
+    #edit-update-btn {
+        color: $white;
+        padding: 5px 20px;
+        background-color: $color-secondary;
+        border: 1px solid $color-secondary;
+        transition: color 0.2s ease, background-color 0.2s ease;
+        &:hover {
+            background-color: transparent;
+            color: $color-secondary;
+        }
+    }
+}

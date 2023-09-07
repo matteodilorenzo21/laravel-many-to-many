@@ -1,0 +1,58 @@
+@use '../vars' as *;
+
+#project-show {
+    border-radius: 10px;
+    color: $color-bone;
+
+    #show-img {
+        width: 720px;
+        height: 360px;
+        display: block;
+        margin: 0 auto;
+        object-fit: cover;
+        border-radius: 15px;
+        border: 2px solid $white;
+        box-shadow: 0px 4px 5px rgba($white, 0.3);
+    }
+
+    .line-primary {
+        margin: 0 auto;
+        width: 98%;
+        height: 1px;
+        background: rgba($black, 0.4);
+        border-radius: 50px;
+        box-shadow: 0px 3px 4px rgba($white, 0.3);
+    }
+
+    strong {
+        color: $color-primary;
+    }
+
+    .label {
+        padding: 3px 10px;
+        border-radius: 50px;
+    }
+
+    #project-url {
+        color: $color-bone;
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+    #index-btn {
+        display: inline-block;
+        text-decoration: none;
+        background-color: $color-primary;
+        padding: 6px 15px;
+        color: $white;
+        border: 1px solid $color-primary;
+        transition: background-color 0.2s ease, color 0.2s ease;
+        &:hover {
+            background-color: transparent;
+            color: $color-primary;
+        }
+    }
+}
+
+
