@@ -22,7 +22,6 @@
                     <th scope="col">ID</th>
                     <th scope="col">Title</th>
                     <th scope="col">Category</th>
-                    <th scope="col">Url</th>
                     <th scope="col">Year</th>
                     <th scope="col">Client</th>
                     <th scope="col">Created at</th>
@@ -43,7 +42,6 @@
                                 -
                             @endif
                         </td>
-                        <td>{{ $project->url }}</td>
                         <td>{{ $project->completion_year }}</td>
                         <td>{{ $project->client }}</td>
                         <td>{{ $project->created_at }}</td>
