@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('technologies', function (Blueprint $table) {
             $table->id();
+            $table->string('label')->unique();
+            $table->char('color', 7)->default('#000000');
             $table->timestamps();
         });
     }
