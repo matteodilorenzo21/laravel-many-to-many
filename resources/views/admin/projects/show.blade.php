@@ -29,14 +29,26 @@
             <div class="row mt-5">
                 <div class="col-12 d-flex">
                     <div class="me-5 ps-2">
+
                         @if ($project->category)
-                            <p><strong>Category:</strong> <span class="label"
+                            <p><strong>Category:</strong> <span class="label ms-2"
                                     style="background-color: {{ $project->category->color }}">{{ $project->category->label }}</span>
                             </p>
                         @else
                             <p><strong>Category:</strong> - </p>
                         @endif
-                        <p><strong>Technologies:</strong> {{ $project->technologies }}</p>
+
+                        <p><strong>Technologies:</strong>
+
+                            @foreach ($project->technologies as $key => $technology)
+                                <span class="label"
+                                    style="color: {{ $technology->color }}; font-size: 13px;">{{ $technology->label }}</span>
+                                @if (!$loop->last)
+                                    |
+                                @endif
+                            @endforeach
+
+                        </p>
                     </div>
                     <div class="me-5">
                         <p><strong>Client:</strong> {{ $project->client }}</p>
