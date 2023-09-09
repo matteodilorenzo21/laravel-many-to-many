@@ -32,18 +32,18 @@
     #projects-table {
         border-color: $color-primary;
 
-        th:first-child {
-            width: 5%;
-            background-color: transparent !important;
-        }
-        
         th:not(:first-child) {
-            width: calc((100% / 8) - 5%);
+            width: calc((100% / 6) - 8%);
             background-color: transparent !important;
         }
 
+        th:first-child {
+            width: 1%;
+            background-color: transparent !important;
+        }
+        
         th:last-child {
-            width: 10%;
+            width: 7%;
             background-color: transparent !important;
         }
 

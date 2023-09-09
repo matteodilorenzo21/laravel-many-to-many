@@ -9,13 +9,14 @@
 
         <div class="table-actions d-flex justify-content-between align-items-center">
             <h1 class="ms-1">Projects</h1>
-            <div class="d-flex align-items-center me-3">
+            <div class="d-flex align-items-center me-5">
                 <span class="fs-4 text-white pb-1">New</span>
-                <a id="add-project-btn" class="ms-2 justify-content-end" href="{{ route('admin.projects.create') }}"><i
+                <a id="add-project-btn" class="ms-2 me-1 justify-content-end" href="{{ route('admin.projects.create') }}"><i
                         class="bi bi-plus-lg"></i></a>
             </div>
         </div>
 
+        {{-- PROJECTS TABLE --}}
         <table id="projects-table" class="table">
             <thead>
                 <tr class="text-center">

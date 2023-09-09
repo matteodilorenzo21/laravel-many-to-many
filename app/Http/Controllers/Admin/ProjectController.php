@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use App\Models\Category;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -26,8 +27,9 @@ class ProjectController extends Controller
     public function create()
     {
         $project = new Project();
+        $technologies = Technology::select('id', 'label')->get();
         $categories = Category::select('id', 'label')->get();
-        return view('admin.projects.create', compact('project', 'categories'));
+        return view('admin.projects.create', compact('project', 'categories', 'technologies'));
     }
 
     /**
@@ -45,6 +47,8 @@ class ProjectController extends Controller
             'completion_year' => 'nullable|integer',
             'client' => 'nullable|string',
             'project_duration' => 'nullable|string',
+            'technologies' => 'nullable|array',
+            'technologies.*' => 'exists:technologies,label',
         ]);
 
         $project = new Project();
@@ -64,6 +68,14 @@ class ProjectController extends Controller
 
         $project->save();
 
+        if (isset($validatedData['technologies'])) {
+            $technologyLabels = $validatedData['technologies'];
+
+            $technologyIds = Technology::whereIn('label', $technologyLabels)->pluck('id')->toArray();
+
+            $project->technologies()->attach($technologyIds);
+        }
+
         return redirect()->route('admin.projects.show', $project->id);
     }
 
@@ -81,7 +93,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $categories = Category::select('id', 'label')->get();
-        return view('admin.projects.edit', compact('project', 'categories'));
+        $technologies = Technology::select('id', 'label')->get();
+        $project_technology_ids = $project->technologies->pluck('id')->toArray();
+        return view('admin.projects.edit', compact('project', 'categories', 'technologies', 'project_technology_ids'));
     }
 
     /**
@@ -92,12 +106,15 @@ class ProjectController extends Controller
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'category_id' => 'nullable|exists:categories,id',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg,mp4|max:5120',
             'url' => 'nullable|url',
             'slug' => 'string|unique:projects,slug,' . $project->id,
             'completion_year' => 'nullable|integer',
             'client' => 'nullable|string',
             'project_duration' => 'nullable|string',
+            'technologies' => 'nullable|array',
+            'technologies.*' => 'exists:technologies,label',
         ]);
 
         $data = $request->all();
@@ -111,6 +128,15 @@ class ProjectController extends Controller
         }
 
         $project->update($data);
+
+        // Aggiungi le tecnologie selezionate
+        if (isset($data['technologies'])) {
+            $technologyLabels = $data['technologies'];
+
+            $technologyIds = Technology::whereIn('label', $technologyLabels)->pluck('id')->toArray();
+
+            $project->technologies()->sync($technologyIds);
+        }
 
         return redirect()->route('admin.projects.show', $project->id);
     }

@@ -11,23 +11,28 @@
     <section id="project-create" class="p-0 text-white">
         <div class="container">
             <div class="d-flex justify-content-between">
-                <h2>New Project</h2>
+                <h3>New Project</h3>
             </div>
-            <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
+
+            {{-- CREATE FORM --}}
+            <form action="{{ route('admin.projects.store') }}" class="bg-dark px-5 py-3 rounded" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="row fw-bold">
+
+                    {{-- FORM LEFT --}}
                     <div class="col-6">
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <label for="title" class="form-label @error('title') is-invalid @enderror">Titolo</label>
                             <input type="text" class="form-control border border-secondary" id="title" name="title"
                                 value="{{ old('title') }}">
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <label for="description"
                                 class="form-label @error('description') is-invalid @enderror">Descrizione</label>
                             <textarea rows="1" class="form-control border border-secondary" id="description" name="description">{{ old('description') }}</textarea>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <label for="category"
                                 class="form-label @error('category_id') is-invalid @enderror">Categoria</label>
                             <select class="form-select" id="category" name="category_id">
@@ -40,7 +45,9 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="mb-3">
+
+                        {{-- FORM IMAGE & PREVIEW --}}
+                        <div class="mb-4">
                             <label for="image" class="form-label">Immagine</label>
                             <input type="file"
                                 class="form-control border border-secondary @error('image') is-invalid @enderror"
@@ -52,38 +59,73 @@
                                 src="{{ old('image') ? asset('public/images/' . old('image')) : 'https://i1.wp.com/potafiori.com/wp-content/uploads/2020/04/placeholder.png?ssl=1' }}"
                                 alt="preview" id="image-preview">
                         </div>
+
                     </div>
+
+                    {{-- FORM RIGHT --}}
                     <div class="col-6">
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <label for="url" class="form-label">URL</label>
                             <input type="url" class="form-control border border-secondary" id="url" name="url"
                                 value="{{ old('url') }}">
                         </div>
-                        <div class="mb-4">
-                            <label for="slug" class="form-label">Slug</label>
-                            <input type="text" class="form-control border border-secondary" id="slug" name="slug"
-                                value="{{ Str::slug(old('title'), '-') }}" disabled>
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                <label for="slug" class="form-label">Slug</label>
+                                <input type="text" class="form-control border border-secondary" id="slug"
+                                    name="slug" value="{{ Str::slug(old('title'), '-') }}" disabled>
+                            </div>
+                            <div class="col-12 mb-2">
+                                <label for="client" class="form-label">Cliente</label>
+                                <input type="text" class="form-control border border-secondary" id="client"
+                                    name="client" value="{{ old('client') }}">
+                            </div>
+                            <div class="col-6 mb-2">
+                                <label for="completion_year" class="form-label">Anno</label>
+                                <input type="text" class="form-control border border-secondary" id="completion_year"
+                                    name="completion_year" value="{{ old('completion_year') }}">
+                            </div>
+                            <div class="col-6 mb-4">
+                                <label for="project_duration" class="form-label">Durata del Progetto</label>
+                                <input type="text" class="form-control border border-secondary" id="project_duration"
+                                    name="project_duration" value="{{ old('project_duration') }}">
+                            </div>
                         </div>
-                        <div class="mb-4">
-                            <label for="completion_year" class="form-label">Anno di Completamento</label>
-                            <input type="text" class="form-control border border-secondary" id="completion_year"
-                                name="completion_year" value="{{ old('completion_year') }}">
+
+                        {{-- TECHNOLOGIES CHECKBOX GROUP --}}
+                        <div class="row bg-dark border border-secondary rounded pt-3 mt-1">
+                            <div class="col-12 text-center">
+                                <label for="technologies" class="form-label mb-3" style="color: #0077FF;">Tecnologie
+                                    Utilizzate</label>
+                                <div class="mb-2 d-flex justify-content-around">
+                                    @foreach ($technologies->sortBy('id')->take(5) as $technology)
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox"
+                                                value="{{ $technology['label'] }}" id="technology_{{ $loop->index }}"
+                                                name="technologies[]">
+                                            <label class="form-check-label" for="technology_{{ $loop->index }}">
+                                                {{ $technology['label'] }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-2 d-flex justify-content-around">
+                                    @foreach ($technologies->sortBy('id')->skip(5)->take(5) as $technology)
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox"
+                                                value="{{ $technology['label'] }}" id="technology_{{ $loop->index }}"
+                                                name="technologies[]">
+                                            <label class="form-check-label" for="technology_{{ $loop->index }}">
+                                                {{ $technology['label'] }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="technologies" class="form-label">Tecnologie Utilizzate</label>
-                            <input type="text" class="form-control border border-secondary" id="technologies"
-                                name="technologies" value="{{ old('technologies') }}">
-                        </div>
-                        <div class="mb-4">
-                            <label for="client" class="form-label">Cliente</label>
-                            <input type="text" class="form-control border border-secondary" id="client" name="client"
-                                value="{{ old('client') }}">
-                        </div>
-                        <div class="mb-3">
-                            <label for="project_duration" class="form-label">Durata del Progetto</label>
-                            <input type="text" class="form-control border border-secondary" id="project_duration"
-                                name="project_duration" value="{{ old('project_duration') }}">
-                        </div>
+
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
